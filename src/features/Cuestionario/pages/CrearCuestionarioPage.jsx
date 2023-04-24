@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import CrearOpcionesPregunta from "../components/CrearOpcionesPregunta";
 
-function CrearCuestionarioPage() {
+function CrearCuestionarioPage(props) {
   const { control, handleSubmit, formState, register } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -27,9 +27,7 @@ function CrearCuestionarioPage() {
     name: "preguntas",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = (data) => {};
   return (
     <div class="bg-white rounded-lg shadow-md p-4">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -61,6 +59,8 @@ function CrearCuestionarioPage() {
               render={({ field, fieldState: { error } }) => (
                 <TextField
                   label="Descripcion"
+                  multiline
+                  rows={4}
                   {...field}
                   error={error ? true : false}
                   helperText={error?.message}

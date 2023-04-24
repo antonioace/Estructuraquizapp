@@ -1,15 +1,25 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import CrearCuestionarioPage from "./feature/Cuestionario/pages/CrearCuestionarioPage";
+
+import Rutas from "./routes/Rutas";
+import useStatusLogin from "./hooks/useStatusLogin";
+import Spinner from "./components/Spinner";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { checkStatusLogin, cargando } = useStatusLogin();
+
+  React.useEffect(() => {
+    console.log("Me ejecutooo")
+    checkStatusLogin();
+  }, []);
 
   return (
     <div>
-      <CrearCuestionarioPage />
+  { 
+  cargando ? <Spinner/>: <Rutas />
+  }
     </div>
   );
 }
