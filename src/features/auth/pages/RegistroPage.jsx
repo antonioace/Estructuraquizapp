@@ -9,7 +9,7 @@ import SpinnerButton from "../../../components/SpinnerButton";
 import { useNavigate } from "react-router-dom";
 
 function RegistroPage() {
-  const { cargando, registrar, methods } = useRegister();
+  const { cargandoRegistro, registrar, methods } = useRegister();
   const {
     register,
     formState: { errors },
@@ -107,31 +107,52 @@ function RegistroPage() {
                 errors.celular && "border-red-500"
               } appearance-none border rounded w-full py-2 px-3 bg-gray-100 focus:bg-white focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline `}
             />
-            {errors.email && (
-              <span className="text-red-500 text-sm">
-                Este campo es requerido
-              </span>
-            )}
+            {errors.email && <CustomError message={errors?.email?.message} />}
+          </div>
+
+          <div>
+            <label
+              htmlFor="clave"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Contraseña
+            </label>
+            <input
+              type="password"
+              name="clave"
+              {...register("clave", {
+                required: { value: true, message: "Campo requerido" },
+                minLength: { value: 6, message: "Mínimo 6 caracteres" },
+              })}
+              id="clave"
+              className={`${
+                errors.clave && "border-red-500"
+              } appearance-none border rounded w-full py-2 px-3 bg-gray-100 focus:bg-white focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline `}
+            />
+            {errors.clave && <CustomError message={errors?.clave?.message} />}
           </div>
           <div className="flex flex-col gap-[12px] mt-3">
             <button
               className="bg-[#f0f0f0] w-[100%] rounded-lg p-2 flex justify-center gap-[5px] "
-              style={{ opacity: cargando ? 0.5 : 1 }}
+              style={{ opacity: cargandoRegistro ? 0.5 : 1 }}
               type="submit"
             >
-              {cargando && <SpinnerButton />} Crear cuenta
+              {cargandoRegistro && (
+                <div>
+                  <SpinnerButton />
+                </div>
+              )}
+              <span> Crear cuenta</span>
             </button>
             <button
-              className="bg-[#d1d1d1] w-[100%] rounded-lg p-2"
+              className="bg-[#d1d1d1] w-[100%] rounded-lg p-2 mt-3"
               onClick={() => navigate("/login")}
             >
               Iniciar sesión
             </button>
           </div>
         </form>
-        <div className="hidden md:block w-[50%] bg-[#d1d1d1] rounded-lg">
-          Holaaaaaaaaaaa aca va la imagen
-        </div>
+        <div className="hidden md:block w-[50%] bg-[#d1d1d1] rounded-lg"></div>
       </div>
     </AuthLayout>
   );

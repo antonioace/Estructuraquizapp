@@ -1,17 +1,35 @@
 import React from "react";
 
 import { sleep } from "../utils/utils";
+import {
+  setCargando as setCargandoAuth,
+  setLogear,
+  setUsuario,
+} from "../store/authStore";
+import {
+  onAuthStateChanged,
+  signInWithCustomToken,
+  signOut,
+} from "firebase/auth";
+import { FirebaseAuth } from "../config/firebase";
 
 function useStatusLogin() {
-  const [cargando, setCargando] = React.useState(false);
   const checkStatusLogin = async () => {
-    setCargando(true);
-    console.log("checkStatusLogin");
+    setCargandoAuth(true);
+    onAuthStateChanged(FirebaseAuth, async (user) => {
+      if (!user) {
+        setUsuario(null);
+        setLogear(false);
+        return signOut(FirebaseAuth);
+      } else {
+        setUsuario(user);
+        setLogear(true);
+      }
 
-    await sleep(2000);
-    setCargando(false);
+      setCargandoAuth(false);
+    });
   };
-  return { checkStatusLogin, cargando };
+  return { checkStatusLogin };
 }
 
 export default useStatusLogin;

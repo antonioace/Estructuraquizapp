@@ -2,11 +2,19 @@ import React from "react";
 import AuthLayout from "../components/AuthLayout";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { CircularProgress } from "@mui/material";
 
 function LoginPage() {
-  const { logear } = useAuth();
+  const { logear, cargando } = useAuth();
+  const methods = useForm();
   return (
     <AuthLayout>
+      {cargando && (
+        <div className="fixed top-0 left-1/2 transform -translate-x-1/2">
+          <CircularProgress color="inherit" />
+        </div>
+      )}
       <div className=" bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -17,7 +25,7 @@ function LoginPage() {
             <Link
               href="#"
               to="/register"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-indigo-500 hover:text-indigo-400"
             >
               Regístrate
             </Link>
@@ -26,7 +34,7 @@ function LoginPage() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={methods.handleSubmit(logear)}>
               <div>
                 <label
                   for="email"
@@ -39,6 +47,7 @@ function LoginPage() {
                     id="email"
                     name="email"
                     type="email"
+                    {...methods.register("email")}
                     autocomplete="email"
                     required
                     className={` appearance-none border rounded w-full py-2 px-3 bg-gray-100 focus:bg-white focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline `}
@@ -56,7 +65,8 @@ function LoginPage() {
                 <div className="mt-1">
                   <input
                     id="password"
-                    name="password"
+                    name="clave"
+                    {...methods.register("clave")}
                     type="password"
                     autocomplete="current-password"
                     required
@@ -84,7 +94,7 @@ function LoginPage() {
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-medium text-blue-600 hover:text-blue-500"
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     ¿Olvidaste tu contraseña?
                   </a>
@@ -93,8 +103,9 @@ function LoginPage() {
 
               <div>
                 <button
+                  disabled={cargando}
                   type="submit"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#8685EF] hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Iniciar sesión
                 </button>

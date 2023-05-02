@@ -9,6 +9,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import CrearOpcionesPregunta from "../components/CrearOpcionesPregunta";
+import Sidebar from "../../../components/Sidebar";
 
 function CrearCuestionarioPage(props) {
   const { control, handleSubmit, formState, register } = useForm({
@@ -29,7 +30,9 @@ function CrearCuestionarioPage(props) {
 
   const onSubmit = (data) => {};
   return (
-    <div class="bg-white rounded-lg shadow-md p-4">
+
+    <Sidebar>
+      <div class="bg-white rounded-lg shadow-md p-4 w-[100%] m-[100px]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col sm:flex-row gap-[20px] sm:justify-center items-center sm:items-baseline ">
           <div className="flex flex-col gap-[10px] w-[50%]">
@@ -147,6 +150,8 @@ function CrearCuestionarioPage(props) {
         <Button type="submit">Guardar</Button>
       </form>
     </div>
+    </Sidebar>
+    
   );
 }
 

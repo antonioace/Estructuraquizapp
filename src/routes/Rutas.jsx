@@ -19,6 +19,7 @@ function Rutas() {
       </Route>
 
       <Route element={<RutasPrivadas />} path="dashboard">
+        <Route path="" element={<Navigate to="crear-cuestionario" />} />
         <Route path="crear-cuestionario" element={<CrearCuestionarioPage />} />
       </Route>
     </Routes>
