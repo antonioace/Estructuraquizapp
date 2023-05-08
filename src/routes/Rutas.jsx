@@ -7,6 +7,10 @@ import RutasPrivadas from "./RutasPrivadas";
 import { observer } from "mobx-react";
 import LoginPage from "../features/auth/pages/LoginPage";
 import RegistroPage from "../features/auth/pages/RegistroPage";
+import InformacionUsuarioPage from "../features/usuario/pages/InformacionUsuarioPage";
+import { rutasPrivadas } from "../utils/constantes";
+import ListaCuestionarioPage from "../features/Cuestionario/pages/ListaCuestionarioPage";
+import EstadisticasPage from "../features/estadisticas/pages/EstadisticasPage";
 
 function Rutas() {
   return (
@@ -18,9 +22,18 @@ function Rutas() {
         <Route path="*" element={<Navigate to="/login" />} />
       </Route>
 
-      <Route element={<RutasPrivadas />} path="dashboard">
+      <Route element={<RutasPrivadas />} path={rutasPrivadas.DASHBOARD}>
         <Route path="" element={<Navigate to="crear-cuestionario" />} />
         <Route path="crear-cuestionario" element={<CrearCuestionarioPage />} />
+        <Route
+          path="listar-cuestionarios"
+          element={<ListaCuestionarioPage />}
+        />
+        <Route
+          path="informacion-usuario"
+          element={<InformacionUsuarioPage />}
+        />
+        <Route path="estadisticas" element={<EstadisticasPage />} />
       </Route>
     </Routes>
   );

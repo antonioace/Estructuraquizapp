@@ -13,12 +13,27 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { color } from "framer-motion";
-import { ListItemText } from "@mui/material";
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import useLogout from "../hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Cuestionarios", "Categorias"];
+const pages = [
+  {
+    name: "Cuestionarios",
+    ruta: "/dashboard/listar-cuestionarios",
+  },
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function MenuInfo() {
+function MenuInfo({ abrirMenuCelular }) {
+  const { deslogear } = useLogout();
+  const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -26,12 +41,11 @@ function MenuInfo() {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    console.log("Evento:", event.currentTarget);
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseNavMenu = (page) => {
+    navigate(page.ruta);
   };
 
   const handleCloseUserMenu = () => {
@@ -43,76 +57,39 @@ function MenuInfo() {
       position="fixed"
       sx={{
         width: { sm: `calc(100% - ${240}px)` },
+        backgroundColor: "#6a27d8",
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+          <IconButton
+            onClick={abrirMenuCelular}
+            size="large"
+            edge="start"
+            color="black"
+            aria-label="menu"
+            sx={{ mr: 2, display: { md: "none", xs: "block" } }}
           >
-            LOGO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <MenuIcon />
+          </IconButton>
+          <Box sx={{ flexGrow: 1, display: { md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                onClick={() => {
+                  handleCloseNavMenu(page);
+                }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Informacion del perfil">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -132,14 +109,28 @@ function MenuInfo() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-              <ListItemText inset>Single</ListItemText>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={() => {
+                      navigate("/dashboard/informacion-usuario");
+                    }}
+                  >
+                    <ListItemText primary="Ver perfil" />
+                  </ListItemButton>
+                </ListItem>
               </MenuItem>
+
               <MenuItem>
-               hOLAAAAA
-                </MenuItem>
-                <MenuItem>
-                <ListItemText inset>hOLAAAAA</ListItemText>
-                </MenuItem>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={() => {
+                      deslogear();
+                    }}
+                  >
+                    <ListItemText primary="Cerrar sesión" />
+                  </ListItemButton>
+                </ListItem>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

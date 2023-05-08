@@ -1,0 +1,24 @@
+Extra Extra Small (xxs):
+
+Anchura: Menos de 375 píxeles
+Altura: Variable
+Extra Small (xs):
+
+Anchura: Menos de 576 píxeles
+Altura: Variable
+Small (sm):
+
+Anchura: Entre 576 píxeles y 768 píxeles
+Altura: Variable
+Medium (md):
+
+Anchura: Entre 768 píxeles y 992 píxeles
+Altura: Variable
+Large (lg):
+
+Anchura: Entre 992 píxeles y 1200 píxeles
+Altura: Variable
+Extra Large (xl):
+
+Anchura: Más de 1200 píxeles
+Altura: Variable

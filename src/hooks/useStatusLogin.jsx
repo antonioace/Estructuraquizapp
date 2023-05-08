@@ -20,7 +20,6 @@ function useStatusLogin() {
       if (!user) {
         setUsuario(null);
         setLogear(false);
-        return signOut(FirebaseAuth);
       } else {
         setUsuario(user);
         setLogear(true);

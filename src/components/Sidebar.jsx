@@ -17,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuInfo from "./MenuInfo";
+import ListaMenuItems from "./ListaMenuItems";
 
 const drawerWidth = 240;
 
@@ -31,21 +32,29 @@ function Sidebar(props) {
   const drawer = (
     <div
       style={{
-        backgroundColor: "#0066FF",
+        backgroundColor: "#ffffff",
         minHeight: "100vh",
       }}
     >
-      <Toolbar />
+      <Toolbar>
+        <div className="flex flex-row justify-center items-center w-[100%]">
+          <img
+            className="max-h-[120px] flex justify-center items-center max-w-[240]"
+            src="https://ih1.redbubble.net/image.2386420274.5433/st,small,507x507-pad,600x600,f8f8f8.jpg"
+            alt="Workflow"
+          />
+        </div>
+      </Toolbar>
       <Divider />
+      <ListaMenuItems/>
 
-      <List></List>
     </div>
   );
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <MenuInfo />
+      <MenuInfo abrirMenuCelular={handleDrawerToggle} />
       <Box
         component="nav"
         sx={{
