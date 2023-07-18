@@ -11,15 +11,13 @@ function CrearCuestionarioForm() {
       descripcion: "",
       categoria: "",
       tipoCuestionario: "",
-      preguntas: [{ nombre: "", descripcion: "", opciones: ["", ""] }],
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "preguntas",
-  });
-  const onSubmit = (data) => {};
+
+  const onSubmit = (data) => {
+    console.log("DATA",data)
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col sm:flex-row gap-[20px] sm:justify-center items-center sm:items-baseline ">
@@ -103,35 +101,12 @@ function CrearCuestionarioForm() {
           />
         </div>
 
-        {/*   <div className="flex flex-col w-[50%]">
-          {fields.map((field, index) => (
-            <div key={field.id} className="flex flex-col gap-[10px]">
-              <h3 className="font-bold">Preguntas</h3>
-              <Controller
-                name={`preguntas[${index}].nombre`}
-                control={control}
-                render={({ field }) => <TextField label="Nombre" {...field} />}
-              />
-              <Controller
-                name={`preguntas[${index}].descripcion`}
-                control={control}
-                render={({ field }) => (
-                  <TextField label="Descripcion" {...field} />
-                )}
-              />
-
-              <div>
-                <CrearOpcionesPregunta control={control} index={index} />
-
-                <Button onClick={() => remove(index)}>Eliminar Pregunta</Button>
-              </div>
-            </div>
-          ))}
-          <Button onClick={() => append({})}>Agregar Pregunta</Button>
-        </div> */}
+        {/*  */}
       </div>
 
-      <Button type="submit">Guardar</Button>
+      <Button type="submit"
+     
+      >Guardar</Button>
     </form>
   );
 }

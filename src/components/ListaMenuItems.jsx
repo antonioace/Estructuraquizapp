@@ -1,10 +1,12 @@
 import {
+  Box,
   Collapse,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -14,10 +16,13 @@ import React from "react";
 import {
   Add,
   Assignment,
+  CheckCircle,
   Close,
+  ExitToAppRounded,
   ExpandLess,
   ExpandMore,
   Refresh,
+  Settings,
   TrendingUp,
   Update,
   ViewList,
@@ -34,6 +39,7 @@ const listaItemsCuestionarios = [
     icon: <Add />,
     to: "/dashboard/crear-cuestionario",
   },
+
   {
     name: "Ver Cuestionarios",
     icon: <ViewList />,
@@ -42,21 +48,67 @@ const listaItemsCuestionarios = [
 ];
 
 function ListaMenuItems() {
-const {deslogear}=useLogout()
+  const { deslogear } = useLogout();
   return (
-    <List>
-      <ListItemLinkCollapse
-        texto="Cuestionarios"
-        icono={<Assignment />}
-        listaItems={listaItemsCuestionarios}
-      />
-      <ListItemLink
-        to="estadisticas"
-        primary="Estadisticas"
-        icon={<TrendingUp />}
-      />
-      <CustomListItemButton icon={<Close />} primaryText={"Cerrar sesión"} onClick={deslogear} />
-    </List>
+    <Box>
+      <Typography
+        variant="h2"
+        sx={{
+          color: "#aeaeae",
+          fontSize: "16px",
+          marginTop: "30px",
+          marginBottom: "20px",
+          fontWeight: "bold",
+          paddingLeft: "20px",
+        }}
+      >
+        MENU
+      </Typography>
+      <List>
+        <ListItemLinkCollapse
+          texto="Cuestionarios"
+          icono={<Assignment />}
+          listaItems={listaItemsCuestionarios}
+        />
+        <ListItemLink
+          to="estadisticas"
+          primary="Estadisticas"
+          icon={<TrendingUp />}
+        />
+         <ListItemLink
+          to="crear-respuesta"
+          primary="Respuesta"
+          icon={<CheckCircle  />}
+        />
+        <Typography
+          variant="h2"
+          sx={{
+            color: "#aeaeae",
+            fontSize: "16px",
+            marginTop: "30px",
+            marginBottom: "20px",
+            fontWeight: "bold",
+            paddingLeft: "20px",
+          }}
+        >
+          AYUDA
+        </Typography>
+
+        <ListItemLink
+          to="informacion-usuario"
+          primary="Configuraciones"
+          icon={<Settings  />}
+        />
+      </List>
+
+      <div className="absolute bottom-0 w-full mb-2 px-4">
+        <CustomListItemButton
+          icon={<ExitToAppRounded />}
+          primaryText={"Cerrar sesión"}
+          onClick={deslogear}
+        />
+      </div>
+    </Box>
   );
 }
 

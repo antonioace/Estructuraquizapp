@@ -1,16 +1,17 @@
-import { deleteUser } from "firebase/auth";
+import instance from "../../../api/api";
 
-const login = async (email, password) => {
-  console.log("Este es el login");
-};
-const registrar = async (data) => {
-  console.log("Este es el registro");
+export const registrarUsuario = (data) => {
+  return instance.post("usuarios", { ...data });
 };
 
-export const eliminarUsuario = async (data) => {
-  try {
-    const resp = await  deleteUser(data);
-  } catch (error) {
-    console.log("Error", error);
-  }
+export const obtenerUsuarioLogeado = () => {
+  return instance.get("usuarios/profile");
+};
+
+export const logearUsuario = (data) => {
+  return instance.post("usuarios/login", { ...data });
+};
+
+export const checkStatus = () => {
+  return instance.get("usuarios/checktoken");
 };

@@ -1,12 +1,14 @@
 import React from "react";
 import AuthLayout from "../components/AuthLayout";
 
-import useRegister from "../hooks/useRegister";
+
 import { Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import CustomError from "../../../components/CustomError";
 import SpinnerButton from "../../../components/SpinnerButton";
 import { useNavigate } from "react-router-dom";
+import useRegister from "../../../hooks/useRegister";
+;
 
 function RegistroPage() {
   const { cargandoRegistro, registrar, methods } = useRegister();
@@ -19,7 +21,7 @@ function RegistroPage() {
 
   return (
     <AuthLayout>
-      <div className="w-full flex   bg-white p-5 gap-3">
+      <div className="w-full flex   bg-white p-5 gap-3 sm:rounded-lg shadow">
         <form
           className=" md:w-[50%] w-[100%]"
           onSubmit={handleSubmit(registrar)}

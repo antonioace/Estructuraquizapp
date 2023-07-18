@@ -33,7 +33,7 @@ function Sidebar(props) {
     <div
       style={{
         backgroundColor: "#ffffff",
-        minHeight: "100vh",
+        height: "100vh",
       }}
     >
       <Toolbar>
@@ -46,57 +46,59 @@ function Sidebar(props) {
         </div>
       </Toolbar>
       <Divider />
-      <ListaMenuItems/>
-
+      <ListaMenuItems />
     </div>
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <>
       <MenuInfo abrirMenuCelular={handleDrawerToggle} />
-      <Box
-        component="nav"
-        sx={{
-          width: { sm: drawerWidth },
-          flexShrink: { sm: 0 },
-        }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+      <Box sx={{ display: "flex", position: "relative" }}>
+        <CssBaseline />
+        {/* */}
+        <Box
+          component="nav"
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
+            width: { sm: drawerWidth },
+            flexShrink: { sm: 0 },
           }}
+          aria-label="mailbox folders"
         >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+        {children}
       </Box>
-      {children}
-    </Box>
+    </>
   );
 }
 

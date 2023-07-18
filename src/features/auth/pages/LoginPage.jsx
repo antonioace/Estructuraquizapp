@@ -1,9 +1,11 @@
 import React from "react";
 import AuthLayout from "../components/AuthLayout";
-import useAuth from "../hooks/useAuth";
+
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { CircularProgress } from "@mui/material";
+import useAuth from "../../../hooks/useAuth";
+import AuthInput from "../components/AuthInput";
 
 function LoginPage() {
   const { logear, cargando } = useAuth();
@@ -43,14 +45,13 @@ function LoginPage() {
                   Correo electrónico
                 </label>
                 <div className="mt-1">
-                  <input
+                  <AuthInput
                     id="email"
                     name="email"
                     type="email"
-                    {...methods.register("email")}
+                    register={methods.register}
                     autocomplete="email"
                     required
-                    className={` appearance-none border rounded w-full py-2 px-3 bg-gray-100 focus:bg-white focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline `}
                   />
                 </div>
               </div>
@@ -63,14 +64,12 @@ function LoginPage() {
                   Contraseña
                 </label>
                 <div className="mt-1">
-                  <input
-                    id="password"
-                    name="clave"
-                    {...methods.register("clave")}
-                    type="password"
-                    autocomplete="current-password"
-                    required
-                    className={` appearance-none border rounded w-full py-2 px-3 bg-gray-100 focus:bg-white focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline `}
+                  <AuthInput
+                    name={"clave"}
+                    type={"password"}
+                    register={methods.register}
+                    autocomplete={"current-password"}
+                    required={true}
                   />
                 </div>
               </div>
@@ -92,12 +91,12 @@ function LoginPage() {
                 </div>
 
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to={"/recuperar-clave"}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     ¿Olvidaste tu contraseña?
-                  </a>
+                  </Link>
                 </div>
               </div>
 

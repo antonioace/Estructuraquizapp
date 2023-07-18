@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 
 export const authStore = observable({
   usuario: null,
-  cargando: false,
+  cargando: true,
   logear: false,
 });
 

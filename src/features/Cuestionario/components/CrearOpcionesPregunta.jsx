@@ -9,11 +9,12 @@ function CrearOpcionesPregunta({ control, index }) {
     control: control,
     name: `preguntas[${index}].opciones`,
   });
+  
   return (
     <div>
       <h4 className="font-bold">Opciones</h4>
       <div className="flex flex-col mt-3">
-        <div className="flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap gap-2">
           {fields.map((opcion, opIndex) => (
             <div>
               <Controller

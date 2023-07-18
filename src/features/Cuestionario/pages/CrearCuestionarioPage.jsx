@@ -16,6 +16,8 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CrearOpcionesPregunta from "../components/CrearOpcionesPregunta";
 
 import CrearCuestionarioForm from "../components/CrearCuestionarioForm";
+import { useParams } from "react-router-dom";
+import CrearCuestionarioPreguntasForm from "../components/CrearCuestionarioPreguntasForm";
 
 function CrearCuestionarioPage(props) {
   const [value, setValue] = React.useState("1");
@@ -23,6 +25,8 @@ function CrearCuestionarioPage(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
   return (
     <div class="bg-white rounded-lg shadow-md p-4 w-[100%] ">
       <h1 className="font-bold text-[28px]">Crear Cuestionario</h1>
@@ -34,13 +38,15 @@ function CrearCuestionarioPage(props) {
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label="Información básica" value="1" />
               <Tab label="Preguntas" value="2" />
-              <Tab label="Tiempo" value="3" />
+            {/*   <Tab label="Tiempo" value="3" /> */}
             </TabList>
           </Box>
           <TabPanel value="1">
             <CrearCuestionarioForm />
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="2">
+            <CrearCuestionarioPreguntasForm />
+          </TabPanel>
           <TabPanel value="3">Item Three</TabPanel>
         </TabContext>
       </Box>

@@ -112,13 +112,6 @@ function ListaCuestionarioPage() {
         <h3 className="font-bold text-[20px]">Editar cuestionario</h3>
         <hr className="mb-5" />
         <CrearCuestionarioPage />
-        {/*     <TextField label="hola"></TextField>
-        <TextField label="hola"></TextField>
-        <TextField label="hola"></TextField>
-        <TextField label="hola"></TextField>
-        <TextField label="hola"></TextField>
-        <TextField label="hola"></TextField>
-        <TextField label="hola"></TextField> */}
       </Drawer>
     </div>
   );

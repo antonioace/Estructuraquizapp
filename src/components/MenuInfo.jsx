@@ -57,7 +57,8 @@ function MenuInfo({ abrirMenuCelular }) {
       position="fixed"
       sx={{
         width: { sm: `calc(100% - ${240}px)` },
-        backgroundColor: "#6a27d8",
+        backgroundColor: "#fff",
+        boxShadow: "none",
       }}
     >
       <Container maxWidth="xl">
@@ -72,7 +73,7 @@ function MenuInfo({ abrirMenuCelular }) {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ flexGrow: 1, display: { md: "flex" } }}>
+         {/*  <Box sx={{ flexGrow: 1, display: { md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
@@ -84,9 +85,9 @@ function MenuInfo({ abrirMenuCelular }) {
                 {page.name}
               </Button>
             ))}
-          </Box>
+          </Box> */}
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0 ,position:"absolute",right:"0"}}>
             <Tooltip title="Informacion del perfil">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" />

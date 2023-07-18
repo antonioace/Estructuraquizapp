@@ -1,10 +1,13 @@
 import React from "react";
 import AuthLayout from "../components/AuthLayout";
+import RecuperarClaveForm from "../components/RecuperarClaveForm";
 
 function RecuperarClave() {
   return (
     <AuthLayout>
-      <h1>Recuperar contraseña</h1>
+      <div className="flex justify-center  h-full ">
+        <RecuperarClaveForm />
+      </div>
     </AuthLayout>
   );
 }

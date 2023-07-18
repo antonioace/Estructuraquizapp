@@ -4,15 +4,8 @@ import { FirebaseAuth } from "../config/firebase";
 
 function useLogout() {
   const deslogear = () => {
-    signOut(FirebaseAuth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("deslogear");
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+    localStorage.removeItem("token");
+    window.location.reload();
   };
 
   return {
