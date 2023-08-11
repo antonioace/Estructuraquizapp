@@ -1,5 +1,10 @@
 import React from "react";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import {
+  Controller,
+  FormProvider,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import {
   TextField,
   Button,
@@ -21,35 +26,40 @@ import CrearCuestionarioPreguntasForm from "../components/CrearCuestionarioPregu
 
 function CrearCuestionarioPage(props) {
   const [value, setValue] = React.useState("1");
+  const methods = useForm();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-
   return (
-    <div class="bg-white rounded-lg shadow-md p-4 w-[100%] ">
-      <h1 className="font-bold text-[28px]">Crear Cuestionario</h1>
+    <div class="bg-white rounded-lg  w-[100%]  p-5 ">
+      <FormProvider {...methods}>
+        <h2 className="font-bold  lg:text-[26px] mb-5">Crear cuestionario </h2>
+        <hr className="mb-10" />
 
-      <hr className="mb-3" />
-      <Box sx={{ width: "100%", typography: "body1" }}>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Información básica" value="1" />
-              <Tab label="Preguntas" value="2" />
-            {/*   <Tab label="Tiempo" value="3" /> */}
-            </TabList>
-          </Box>
-          <TabPanel value="1">
-            <CrearCuestionarioForm />
-          </TabPanel>
-          <TabPanel value="2">
-            <CrearCuestionarioPreguntasForm />
-          </TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
-        </TabContext>
-      </Box>
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="Información básica" value="1" />
+                <Tab label="Preguntas" value="2" />
+                <Tab label="Tiempo" value="3" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              <CrearCuestionarioForm />
+            </TabPanel>
+            <TabPanel value="2">
+              <CrearCuestionarioPreguntasForm />
+            </TabPanel>
+            <TabPanel value="3">Item Three</TabPanel>
+          </TabContext>
+        </Box>
+      </FormProvider>
     </div>
   );
 }

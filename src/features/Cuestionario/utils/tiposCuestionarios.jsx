@@ -1,0 +1,20 @@
+export const tiposDeCuestionarios = [
+  { label: "Evaluación", key: "evaluacion" },
+  { label: "Opinión", key: "opinion" },
+  { label: "Satisfacción", key: "satisfaccion" },
+  { label: "Evaluación del Desempeño", key: "evaluacionDesempeno" },
+  { label: "Autoevaluación", key: "autoevaluacion" },
+  { label: "Personalidad", key: "personalidad" },
+  { label: "Estilo de Aprendizaje", key: "estiloAprendizaje" },
+  { label: "Evaluación de Eventos", key: "evaluacionEventos" },
+  { label: "Salud", key: "salud" },
+  { label: "Entrevista", key: "entrevista" },
+  { label: "Investigación", key: "investigacion" },
+  { label: "Selección de Personal", key: "seleccionPersonal" },
+  { label: "Evaluación de Cursos", key: "evaluacionCursos" },
+  { label: "Medición del Estrés", key: "medicionEstres" },
+  {
+    label: "Evaluación de Riesgos Laborales",
+    key: "evaluacionRiesgosLaborales",
+  },
+];

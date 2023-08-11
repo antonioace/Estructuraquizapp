@@ -1,10 +1,18 @@
-import { Button, MenuItem, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import React from "react";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm, useFormContext } from "react-hook-form";
 import CrearOpcionesPregunta from "./CrearOpcionesPregunta";
+import { tiposDeCuestionarios } from "../utils/tiposCuestionarios";
 
 function CrearCuestionarioForm() {
-  const { control, handleSubmit, formState, register } = useForm({
+  const { control, handleSubmit, formState, register } = useFormContext({
     mode: "onChange",
     defaultValues: {
       nombre: "",
@@ -14,15 +22,13 @@ function CrearCuestionarioForm() {
     },
   });
 
-
   const onSubmit = (data) => {
-    console.log("DATA",data)
+    console.log("DATA", data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col sm:flex-row gap-[20px] sm:justify-center items-center sm:items-baseline ">
         <div className="flex flex-col gap-[10px] w-[100%]">
-        
           <Controller
             name="nombre"
             rules={{
@@ -49,7 +55,7 @@ function CrearCuestionarioForm() {
               <TextField
                 label="Descripcion"
                 multiline
-                rows={4}
+                rows={3}
                 {...field}
                 error={error ? true : false}
                 helperText={error?.message}
@@ -63,18 +69,18 @@ function CrearCuestionarioForm() {
               required: { value: true, message: "Este campo es requerido" },
             }}
             render={({ field, fieldState: { error } }) => (
-              <TextField
-                select
-                label="Categoria"
-                {...field}
-                error={error ? true : false}
-                helperText={error?.message}
-                style={{ textAlign: "left" }}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </TextField>
+              <FormControl>
+                <InputLabel id="demo-multiple-name-label">Categoria</InputLabel>
+                <Select
+                  labelId="demo-multiple-name-label"
+                  multiple
+                  label="Categoria"
+                  {...field}
+                  error={error ? true : false}
+                  helperText={error?.message}
+                  style={{ textAlign: "left" }}
+                ></Select>
+              </FormControl>
             )}
           />
 
@@ -93,9 +99,11 @@ function CrearCuestionarioForm() {
                 helperText={error?.message}
                 style={{ textAlign: "left" }}
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {tiposDeCuestionarios.map((tipo, index) => (
+                  <MenuItem key={index} value={tipo.key}>
+                    {tipo.label}
+                  </MenuItem>
+                ))}
               </TextField>
             )}
           />
@@ -104,9 +112,7 @@ function CrearCuestionarioForm() {
         {/*  */}
       </div>
 
-      <Button type="submit"
-     
-      >Guardar</Button>
+      <Button type="submit">Guardar</Button>
     </form>
   );
 }

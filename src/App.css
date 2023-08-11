@@ -1,10 +1,19 @@
 html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-
-  html,body {
-    height:100%;
+  box-sizing: border-box;
 }
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* .accordeon-cuestionario .MuiPaper-elevation {
+  border: none !important;
+  box-shadow: none !important;
+}
+ */

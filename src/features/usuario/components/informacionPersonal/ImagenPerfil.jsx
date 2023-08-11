@@ -1,3 +1,5 @@
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Edit } from "@mui/icons-material";
 import React from "react";
 
@@ -17,7 +19,9 @@ function ImagenPerfil() {
       </div>
       <div className="flex-grow"></div>
       <div>
-        <Edit className="text-gray-600 hover:text-gray-900 cursor-pointer" />
+        <button>
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
       </div>
     </div>
   );
