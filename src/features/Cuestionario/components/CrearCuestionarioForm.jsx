@@ -1,13 +1,19 @@
 import {
   Button,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
 import React from "react";
-import { Controller, useFieldArray, useForm, useFormContext } from "react-hook-form";
+import {
+  Controller,
+  useFieldArray,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
 import CrearOpcionesPregunta from "./CrearOpcionesPregunta";
 import { tiposDeCuestionarios } from "../utils/tiposCuestionarios";
 
@@ -17,7 +23,7 @@ function CrearCuestionarioForm() {
     defaultValues: {
       nombre: "",
       descripcion: "",
-      categoria: "",
+      categoria: [],
       tipoCuestionario: "",
     },
   });
@@ -76,35 +82,18 @@ function CrearCuestionarioForm() {
                   multiple
                   label="Categoria"
                   {...field}
+                  value={field.value || []}
                   error={error ? true : false}
-                  helperText={error?.message}
                   style={{ textAlign: "left" }}
-                ></Select>
+                >
+                  {tiposDeCuestionarios.map((tipo, index) => (
+                    <MenuItem key={index} value={tipo.key}>
+                      {tipo.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>{error?.message}</FormHelperText>
               </FormControl>
-            )}
-          />
-
-          <Controller
-            name="tipoCuestionario"
-            control={control}
-            rules={{
-              required: { value: true, message: "Este campo es requerido" },
-            }}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                select
-                label="Tipo del cuestionario"
-                {...field}
-                error={error ? true : false}
-                helperText={error?.message}
-                style={{ textAlign: "left" }}
-              >
-                {tiposDeCuestionarios.map((tipo, index) => (
-                  <MenuItem key={index} value={tipo.key}>
-                    {tipo.label}
-                  </MenuItem>
-                ))}
-              </TextField>
             )}
           />
         </div>

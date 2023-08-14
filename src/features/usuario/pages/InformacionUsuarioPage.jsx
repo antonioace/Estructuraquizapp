@@ -12,6 +12,7 @@ import Facturacion from "../components/facturacion/Facturacion";
 import ExportacionDatos from "../components/exportacionesDatos/ExportacionDatos";
 import Notificaciones from "../components/notificaciones/Notificaciones";
 import Seguridad from "../components/seguridad/Seguridad";
+import UploadFileFireBase from "../../../components/UploadFileFireBase";
 
 function InformacionUsuarioPage() {
   const { cargando, usuario } = useUser();
@@ -29,6 +30,7 @@ function InformacionUsuarioPage() {
     notificaciones: <Notificaciones />,
     exportacionDatos: <ExportacionDatos />,
     facturacion: <Facturacion />,
+    archivos: <UploadFileFireBase />,
     default: <h1>Default</h1>,
   };
   const ComponenteActivo = opcionesSidebarComponente[activaOpcion || "default"];

@@ -8,6 +8,7 @@ export const cuestionarioStore = observable({
   },
   estados: null,
   listaCuestionarios: [],
+  
 });
 
 export const setInformacionBasicaCuestionario = action((informacionBasica) => {

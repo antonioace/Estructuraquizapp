@@ -1,50 +1,18 @@
 import { Delete, Edit } from "@mui/icons-material";
-import { Drawer, IconButton, TextField } from "@mui/material";
+import { Box, Drawer, IconButton, TextField } from "@mui/material";
 import { DataGrid, GridToolbar, esES } from "@mui/x-data-grid";
 import React, { useState } from "react";
 import CrearCuestionarioPage from "./CrearCuestionarioPage";
-
-const rows = [
-  {
-    id: 1,
-    nombre: "Producto 1",
-    descripcion: "Descripción del producto 1",
-    categoria: "Categoría 1",
-    tipoFormulario: "Tipo 1",
-  },
-  {
-    id: 2,
-    nombre: "Producto 2",
-    descripcion: "Descripción del producto 2",
-    categoria: "Categoría 2",
-    tipoFormulario: "Tipo 2",
-  },
-  {
-    id: 3,
-    nombre: "Producto 3",
-    descripcion: "Descripción del producto 3",
-    categoria: "Categoría 3",
-    tipoFormulario: "Tipo 3",
-  },
-  {
-    id: 4,
-    nombre: "Producto 4",
-    descripcion: "Descripción del producto 4",
-    categoria: "Categoría 4",
-    tipoFormulario: "Tipo 4",
-  },
-  {
-    id: 5,
-    nombre: "Producto 5",
-    descripcion: "Descripción del producto 5",
-    categoria: "Categoría 5",
-    tipoFormulario: "Tipo 5",
-  },
-];
+import useObtenerCuestionarios from "../hooks/useObtenerCuestionarios";
+import { query } from "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function ListaCuestionarioPage() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
+
+  const queryCuestionrios = useObtenerCuestionarios();
   const [open, setOpen] = useState(false);
   const abrirDrawer = () => {
     setOpen(true);
@@ -53,25 +21,31 @@ function ListaCuestionarioPage() {
     { field: "nombre", headerName: "Nombre", width: 200 },
     { field: "descripcion", headerName: "Descripción", width: 300 },
     { field: "categoria", headerName: "Categoría", width: 150 },
-    { field: "tipoFormulario", headerName: "Tipo de formulario", width: 200 },
+    { field: "idUsuario", headerName: "ID Usuario", width: 150 }, // Agregado el ID de Usuario
     {
       field: "acciones",
       headerName: "Acciones",
       width: 120,
       sortable: false,
       renderCell: (params) => (
-        <>
-          <IconButton
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            gap: "10px",
+          }}
+        >
+          <button
             onClick={() => {
               abrirDrawer();
             }}
           >
-            <Edit />
-          </IconButton>
-          <IconButton>
-            <Delete />
-          </IconButton>
-        </>
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </Box>
       ),
     },
   ];
@@ -85,11 +59,22 @@ function ListaCuestionarioPage() {
     setPageSize(params.pageSize);
   };
 
+  const dataCuestionarios = React.useMemo(() => {
+    if (queryCuestionrios.data?.data) {
+      return queryCuestionrios.data?.data.map((cuestionario) => ({
+        ...cuestionario,
+        id: cuestionario._id,
+      }));
+    }
+    return [];
+  }, [queryCuestionrios.data?.data]);
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={dataCuestionarios || []}
         columns={columns}
+        loading={queryCuestionrios.isFetching}
         pageSize={pageSize}
         page={page}
         onPageChange={handlePageChange}

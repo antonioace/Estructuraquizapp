@@ -23,6 +23,7 @@ import CrearOpcionesPregunta from "../components/CrearOpcionesPregunta";
 import CrearCuestionarioForm from "../components/CrearCuestionarioForm";
 import { useParams } from "react-router-dom";
 import CrearCuestionarioPreguntasForm from "../components/CrearCuestionarioPreguntasForm";
+import UploadFileFireBase from "../../../components/UploadFileFireBase";
 
 function CrearCuestionarioPage(props) {
   const [value, setValue] = React.useState("1");
@@ -48,6 +49,7 @@ function CrearCuestionarioPage(props) {
                 <Tab label="Información básica" value="1" />
                 <Tab label="Preguntas" value="2" />
                 <Tab label="Tiempo" value="3" />
+                <Tab label="Imagen" value="4" />
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -57,6 +59,9 @@ function CrearCuestionarioPage(props) {
               <CrearCuestionarioPreguntasForm />
             </TabPanel>
             <TabPanel value="3">Item Three</TabPanel>
+            <TabPanel value="4">
+              <UploadFileFireBase />
+            </TabPanel>
           </TabContext>
         </Box>
       </FormProvider>

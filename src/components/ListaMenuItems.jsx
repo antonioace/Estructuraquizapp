@@ -21,6 +21,7 @@ import {
   ExitToAppRounded,
   ExpandLess,
   ExpandMore,
+  Home,
   Refresh,
   Settings,
   TrendingUp,
@@ -65,6 +66,11 @@ function ListaMenuItems() {
         MENU
       </Typography>
       <List>
+        <ListItemLink
+          to="inicio"
+          primary="Inicio"
+          icon={<Home />}
+        />
         <ListItemLinkCollapse
           texto="Cuestionarios"
           icono={<Assignment />}
@@ -75,10 +81,10 @@ function ListaMenuItems() {
           primary="Estadisticas"
           icon={<TrendingUp />}
         />
-         <ListItemLink
+        <ListItemLink
           to="crear-respuesta"
           primary="Respuesta"
-          icon={<CheckCircle  />}
+          icon={<CheckCircle />}
         />
         <Typography
           variant="h2"
@@ -97,7 +103,7 @@ function ListaMenuItems() {
         <ListItemLink
           to="informacion-usuario"
           primary="Configuraciones"
-          icon={<Settings  />}
+          icon={<Settings />}
         />
       </List>
 

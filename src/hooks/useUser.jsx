@@ -4,7 +4,7 @@ import { obtenerUsuarioLogeado } from "../features/auth/services/authServices";
 import { useQuery } from "react-query";
 
 function useUser() {
-  const { data, isSuccess, isError, isFetching,isLoading } = useQuery(
+  const { data, isSuccess, isError, isFetching, isLoading } = useQuery(
     "usuario",
     obtenerUsuarioLogeado
   );

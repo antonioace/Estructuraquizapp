@@ -16,6 +16,7 @@ import { authStore, setCargando } from "../store/authStore";
 import Spinner from "../components/Spinner";
 import RespuestasForm from "../features/respuestas/pages/RespuestasForm";
 import RecuperarClave from "../features/auth/pages/RecuperarClave";
+import Principal from "../features/inicio/pages/Principal";
 
 function Rutas() {
   const { verificarToken } = useStatusLogin();
@@ -39,6 +40,7 @@ function Rutas() {
 
           <Route element={<RutasPrivadas />} path={rutasPrivadas.DASHBOARD}>
             <Route path="" element={<Navigate to="crear-cuestionario" />} />
+            <Route path="inicio" element={<Principal />} />
             <Route
               path="crear-cuestionario"
               element={<CrearCuestionarioPage hola={"hola1"} />}
