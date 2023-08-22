@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Rutas from "./routes/Rutas";
 
-import Spinner from "./components/Spinner";
-import { authStore } from "./store/authStore";
-import { observer } from "mobx-react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false, // Configuración para no recargar en foco
+      },
+    },
+  });
+
   return (
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
       <div>
         <Rutas />
       </div>
@@ -20,4 +20,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default App;

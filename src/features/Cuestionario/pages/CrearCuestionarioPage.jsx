@@ -23,7 +23,8 @@ import CrearOpcionesPregunta from "../components/CrearOpcionesPregunta";
 import CrearCuestionarioForm from "../components/CrearCuestionarioForm";
 import { useParams } from "react-router-dom";
 import CrearCuestionarioPreguntasForm from "../components/CrearCuestionarioPreguntasForm";
-import UploadFileFireBase from "../../../components/UploadFileFireBase";
+import UploadFileFireBase from "../../file/components/UploadFileFireBase";
+
 
 function CrearCuestionarioPage(props) {
   const [value, setValue] = React.useState("1");

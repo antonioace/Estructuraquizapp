@@ -12,7 +12,8 @@ import Facturacion from "../components/facturacion/Facturacion";
 import ExportacionDatos from "../components/exportacionesDatos/ExportacionDatos";
 import Notificaciones from "../components/notificaciones/Notificaciones";
 import Seguridad from "../components/seguridad/Seguridad";
-import UploadFileFireBase from "../../../components/UploadFileFireBase";
+import UploadFileFireBase from "../../file/components/UploadFileFireBase";
+
 
 function InformacionUsuarioPage() {
   const { cargando, usuario } = useUser();
