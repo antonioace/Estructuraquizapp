@@ -22,6 +22,7 @@ import {
   ExpandLess,
   ExpandMore,
   Home,
+  Person,
   Refresh,
   Settings,
   TrendingUp,
@@ -33,6 +34,7 @@ import ListItemLinkCollapse from "./ListItemLinkCollapse";
 import { CustomListItemButton } from "./CustomLinkItemComponente";
 import useLogout from "../hooks/useLogout";
 import { observer } from "mobx-react";
+import ListaUsuarios from "../features/Cuestionario/pages/ListaUsuarios";
 
 const listaItemsCuestionarios = [
   {
@@ -85,6 +87,11 @@ function ListaMenuItems() {
           to="crear-respuesta"
           primary="Respuesta"
           icon={<CheckCircle />}
+        />
+         <ListItemLink
+          to="usuarios"
+          primary="Usuarios"
+          icon={<Person />}
         />
         <Typography
           variant="h2"

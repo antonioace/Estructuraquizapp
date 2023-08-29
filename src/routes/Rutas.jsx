@@ -17,6 +17,7 @@ import Spinner from "../components/Spinner";
 import RespuestasForm from "../features/respuestas/pages/RespuestasForm";
 import RecuperarClave from "../features/auth/pages/RecuperarClave";
 import Principal from "../features/inicio/pages/Principal";
+import UsuariosPage from "../features/Cuestionario/pages/UsuariosPage";
 
 function Rutas() {
   const { verificarToken } = useStatusLogin();
@@ -59,6 +60,8 @@ function Rutas() {
               element={<InformacionUsuarioPage />}
             />
             <Route path="estadisticas" element={<EstadisticasPage />} />
+            <Route path="usuarios" element={<UsuariosPage />} />
+
           </Route>
         </Routes>
       )}
