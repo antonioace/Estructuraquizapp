@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import useSubirArchivo from "../hooks/useSubirArchivo";
@@ -6,14 +6,24 @@ import useObtenerArchivos from "../hooks/useObtenerArchivos";
 import ModalVistaPrevia from "./ModalVistaPrevia";
 import useEliminarArchivo from "../hooks/useEliminarArchivo";
 import Spinner from "../../../components/Spinner";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 // hazme un funcion axios usando multipart/form-data
 
 function UploadFileFireBase({}) {
   const inputFileRef = useRef(null);
-  const [files, setFiles] = React.useState([]);
-  const [open, setOpen] = React.useState(false);
-  const [imagenUrl, setImagenUrl] = React.useState("");
+  const [files, setFiles] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [openConfirmar, setOpenConfirmar] = useState(false);
+  const [imagenUrl, setImagenUrl] = useState("");
+  const [fileToDelete, setFileToDelete] = useState(null); // Estado para almacenar el archivo a eliminar
   const mutationSubirArchivo = useSubirArchivo();
   const mutationEliminarArchivo = useEliminarArchivo();
   const queryArchivos = useObtenerArchivos();
@@ -27,6 +37,7 @@ function UploadFileFireBase({}) {
       inputFileRef.current.click();
     }
   };
+
   const handleUploadFile = (e) => {
     const files = e.target.files;
     if (files.length > 0) {
@@ -36,20 +47,28 @@ function UploadFileFireBase({}) {
   };
 
   const handleDeleteFile = (file) => {
-    mutationEliminarArchivo.mutate(file._id);
+    setFileToDelete(file); // Establecer el archivo a eliminar en el estado
+    setOpenConfirmar(true); // Abrir el diálogo de confirmación
+  };
+
+  const handleDeleteConfirmed = () => {
+    if (fileToDelete) {
+      mutationEliminarArchivo.mutate(fileToDelete._id);
+    }
+    setFileToDelete(null); // Limpiar el archivo a eliminar del estado
+    setOpenConfirmar(false); // Cerrar el diálogo de confirmación
   };
 
   const handlePreviewFile = (file) => {
     setImagenUrl(file.url);
     setOpen(true);
   };
+
   React.useEffect(() => {
     if (queryArchivos?.data) {
-      console.log("queryArchivos", queryArchivos.data);
       setFiles(queryArchivos?.data?.data || []);
     }
   }, [queryArchivos.data]);
-  console.log("Openn", open);
 
   return (
     <>
@@ -58,6 +77,22 @@ function UploadFileFireBase({}) {
         closeModal={closeModal}
         open={open}
       />
+      <Dialog open={openConfirmar} onClose={() => setOpenConfirmar(false)}>
+        <DialogTitle>Confirmar eliminación</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            ¿Estás seguro de que deseas eliminar este archivo?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenConfirmar(false)} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleDeleteConfirmed} color="primary">
+            Eliminar
+          </Button>
+        </DialogActions>
+      </Dialog>
       <div className="border rounded-lg p-4 bg-[#f8f9fc] relative">
         {queryArchivos.isFetching && (
           <div className="absolute w-full h-full opacity-50 z-20">
